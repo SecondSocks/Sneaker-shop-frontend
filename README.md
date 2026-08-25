@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sneaker Shop — Frontend
+
+Next.js 16 frontend for the sneaker shop, built with React 19, Apollo Client (GraphQL), React Hook Form + Zod, Zustand, and Tailwind CSS 4. Package management uses [Bun](https://bun.sh).
+
+## Prerequisites
+
+- [Bun](https://bun.sh) 1.x
+- Node.js 20+ (if running with `npm`/`yarn`/`pnpm` instead)
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install
+```
+
+Set the backend GraphQL URL via environment variables:
+
+| Variable              | Description                              | Default                          |
+| --------------------- | ---------------------------------------- | -------------------------------- |
+| `BACKEND_GRAPHQL_URL` | Backend GraphQL endpoint (server side)   | `http://localhost:4200/graphql`  |
+
+Run the development server:
+
+```bash
+bun run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command             | Description                                      |
+| ------------------- | ------------------------------------------------ |
+| `bun run dev`       | Start the development server                     |
+| `bun run build`     | Create a production build                        |
+| `bun run start`     | Start the production server                      |
+| `bun run codegen`   | Generate GraphQL types from `codegen.ts`         |
 
-## Learn More
+## Docker
 
-To learn more about Next.js, take a look at the following resources:
+Build the image:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+docker build -t sneaker-shop-frontend .
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Run the container:
 
-## Deploy on Vercel
+```bash
+docker run -p 3000:3000 \
+  -e BACKEND_GRAPHQL_URL=http://localhost:4200/graphql \
+  sneaker-shop-frontend
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Or use Docker Compose:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+BACKEND_GRAPHQL_URL=http://localhost:4200/graphql docker compose up --build
+```
+
+The app will be available at [http://localhost:3000](http://localhost:3000).
