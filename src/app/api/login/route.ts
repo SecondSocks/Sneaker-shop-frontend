@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 
-import { BACKEND_GRAPHQL_URL, setAuthCookies } from '@/app/api/routes'
+import { setAuthCookies } from '@/app/api/routes'
+import { BACKEND_GRAPHQL_URL } from '@config/env'
 
 export async function POST(req: Request) {
 	const body = await req.json()

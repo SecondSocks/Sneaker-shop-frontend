@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { cookies } from 'next/headers'
 
+import { BACKEND_GRAPHQL_URL } from '@config/env'
 import { MainProvider } from '@/providers/MainProvider'
 
 import '../globals.css'
@@ -20,7 +21,7 @@ async function getUserProfile() {
 	const cookieStore = await cookies()
 	const cookiesHeader = cookieStore.toString()
 
-	const res = await fetch('http://localhost:3000/api/graphql', {
+	const res = await fetch(BACKEND_GRAPHQL_URL, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
