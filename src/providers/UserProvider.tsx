@@ -1,3 +1,5 @@
+'use client'
+
 import { ReactNode, useEffect } from 'react'
 
 import { TUser } from '@/types/user.interface'

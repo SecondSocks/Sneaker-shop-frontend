@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 
 import { MainProvider } from '@/providers/MainProvider'
 
-import './globals.css'
+import '../globals.css'
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',

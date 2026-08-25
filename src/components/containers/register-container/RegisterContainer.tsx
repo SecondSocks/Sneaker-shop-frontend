@@ -1,3 +1,5 @@
+'use client'
+
 import { RegisterForm } from '@/components/elements/RegisterForm'
 
 import { useRegister } from './useRegister'

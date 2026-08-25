@@ -1,7 +1,10 @@
 import type { NextResponse } from 'next/server'
 
 export const BACKEND_GRAPHQL_URL =
-	process.env.BACKEND_GRAPHQL_URL ?? 'http://localhost:4200/graphql'
+	process.env.BACKEND_GRAPHQL_URL ??
+	(() => {
+		throw new Error('BACKEND_GRAPHQL_URL is not defined')
+	})()
 
 const COOKIE_BASE_OPTIONS = {
 	httpOnly: true,
