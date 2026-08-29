@@ -21,15 +21,16 @@ async function getUserProfile() {
 	const cookieStore = await cookies()
 	const cookiesHeader = cookieStore.toString()
 
-	const res = await fetch(BACKEND_GRAPHQL_URL, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			cookie: cookiesHeader
-		},
-		body: JSON.stringify({
-			operationName: 'profile',
-			query: `
+	try {
+		const res = await fetch(BACKEND_GRAPHQL_URL, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				cookie: cookiesHeader
+			},
+			body: JSON.stringify({
+				operationName: 'profile',
+				query: `
         query Profile {
           profile {
             name
@@ -44,14 +45,18 @@ async function getUserProfile() {
           }
         }
       `
-		}),
-		cache: 'no-store'
-	})
+			}),
+			cache: 'no-store'
+		})
 
-	if (!res.ok) return null
+		if (!res.ok) return null
 
-	const json = await res.json()
-	return json?.data?.profile ?? null
+		const json = await res.json()
+		return json?.data?.profile ?? null
+	} catch (error) {
+		console.error('Error fetching user profile:', error)
+		return null
+	}
 }
 
 export const metadata: Metadata = {
